@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Penguin.Cms.Repositories</name>
+    </assembly>
+    <members>
+        <member name="T:Penguin.Cms.Repositories.UserAuditableEntityRepository`1">
+            <summary>
+            This class should accept a user session and update the creator, but it does not currently. 
+            </summary>
+            <typeparam name="T">Any user auditable entity type</typeparam>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.UserAuditableEntityRepository`1.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{`0},Penguin.Messaging.Core.MessageBus)">
+            <summary>
+            Creates a new instance of this repository
+            </summary>
+            <param name="dbContext">The persistence context to use for the obejcts</param>
+            <param name="messageBus">And optional message bus for persistence messages</param>
+        </member>
+    </members>
+</doc>
