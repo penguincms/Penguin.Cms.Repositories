@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -7,28 +7,28 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>http://www.penguinms.com/Nuget</PackageProjectUrl>
     <PackageIconUrl>http://www.penguinms.com/client/images/pg.png</PackageIconUrl>
-    <Version>1.0.3</Version>
+    <Version>1.1.0</Version>
     <Description>Provides base repository classes intended for use with Penguin.Cms modules.</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Penguin.Cms.Entities" Version="1.0.5" />
+    <PackageReference Include="Penguin.Cms.Entities" Version="1.0.6" />
     <PackageReference Include="Penguin.Messaging.Core" Version="2.0.9" />
-    <PackageReference Include="Penguin.Persistence.Repositories" Version="1.1.12" />
+    <PackageReference Include="Penguin.Persistence.Repositories" Version="1.2.0" />
   </ItemGroup>
 
  <ItemGroup>
-    <None Include="..\License.txt">
+    <None Include="License.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningsAsErrors>NU1605, CS1591</WarningsAsErrors>
-    <DocumentationFile>C:\SVN\Framework\Nuget\Penguin.Cms.Repositories\Penguin.Cms.Repositories.xml</DocumentationFile>
+    <DocumentationFile>Penguin.Cms.Repositories.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>full</DebugType>
-    <DocumentationFile>C:\SVN\Framework\Nuget\Penguin.Cms.Repositories\Penguin.Cms.Repositories.xml</DocumentationFile>
+    <DocumentationFile>Penguin.Cms.Repositories.xml</DocumentationFile>
   </PropertyGroup>
 </Project>
