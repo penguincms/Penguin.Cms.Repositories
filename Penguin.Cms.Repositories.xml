@@ -6,7 +6,7 @@
     <members>
         <member name="T:Penguin.Cms.Repositories.UserAuditableEntityRepository`1">
             <summary>
-            This class should accept a user session and update the creator, but it does not currently. 
+            This class should accept a user session and update the creator, but it does not currently.
             </summary>
             <typeparam name="T">Any user auditable entity type</typeparam>
         </member>
