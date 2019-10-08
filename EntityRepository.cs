@@ -171,6 +171,12 @@ namespace Penguin.Cms.Repositories
             } else if (Key is string s)
             {
                 return this.Find(s);
+            } else if(this.GetType().GetGenericArguments()[0].IsAssignableFrom(Key.GetType()))
+            {
+                //JIT Fucks up the generic sometimes apparently and returns __Canon, which causes 
+                //the parameter to get treated as an object, breaking the repository if you dont redirect
+                //the call
+                return this.Find(Key as T);
             } else
             {
                 return base.Find(Key);

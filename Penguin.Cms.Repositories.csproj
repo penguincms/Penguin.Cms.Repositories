@@ -2,7 +2,7 @@
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
   <PropertyGroup>
     <PackageProjectUrl>https://github.com/penguincms/Penguin.Cms.Repositories</PackageProjectUrl>
-    <Version>3.0.1</Version>
+    <Version>3.0.3</Version>
     <Description>Provides base repository classes intended for use with Penguin.Cms modules.</Description>
   </PropertyGroup>
   <ItemGroup>
