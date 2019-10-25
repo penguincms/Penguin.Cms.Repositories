@@ -5,6 +5,7 @@ Penguin.Cms.Email.Templating.Repositories
 Penguin.Cms.Files.Repositories
 Penguin.Cms.Forms.Repositories
 Penguin.Cms.Images.Repositories
+Penguin.Cms.Modules.Dynamic
 Penguin.Cms.Navigation.Repositories
 Penguin.Cms.Pages.Repositories
 Penguin.Cms.Security.Repositories
