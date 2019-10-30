@@ -5,9 +5,11 @@
     <Version>3.0.3</Version>
     <Description>Provides base repository classes intended for use with Penguin.Cms modules.</Description>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Penguin.Cms.Repositories</AssemblyName>
+    <RootNamespace>Penguin.Cms.Repositories</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Persistence.Repositories" Version="3.0.3-T9M1HHH" />
-    <PackageReference Include="Penguin.Cms.Entities" Version="3.0.4-T9M1HHH" />
+    <PackageReference Include="Penguin.Persistence.Repositories" Version="3.0.3-T9M2XAX" />
+    <PackageReference Include="Penguin.Cms.Entities" Version="3.0.4-T9M2XAX" />
   </ItemGroup>
 </Project>

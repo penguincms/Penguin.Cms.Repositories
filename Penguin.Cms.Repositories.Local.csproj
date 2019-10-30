@@ -5,21 +5,23 @@
     <Version>3.0.3</Version>
     <Description>Provides base repository classes intended for use with Penguin.Cms modules.</Description>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Penguin.Cms.Repositories</AssemblyName>
+    <RootNamespace>Penguin.Cms.Repositories</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Penguin.Cms.Entities\Penguin.Cms.Entities.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Persistence.Abstractions\Penguin.Persistence.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Entities.Abstractions\Penguin.Entities.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Reflection.Extensions\Penguin.Reflection.Extensions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Extensions.String\Penguin.Extensions.String.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Reflection.Abstractions\Penguin.Reflection.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Messaging.Core\Penguin.Messaging.Core.Local.csproj" />
     <ProjectReference Include="..\Penguin.Debugging\Penguin.Debugging.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Extensions.Exceptions\Penguin.Extensions.Exceptions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Messaging.Abstractions\Penguin.Messaging.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Persistence.Repositories\Penguin.Persistence.Repositories.Local.csproj" />
     <ProjectReference Include="..\Penguin.DependencyInjection.Abstractions\Penguin.DependencyInjection.Abstractions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Entities.Abstractions\Penguin.Entities.Abstractions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Extensions.Exceptions\Penguin.Extensions.Exceptions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Extensions.String\Penguin.Extensions.String.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Messaging.Abstractions\Penguin.Messaging.Abstractions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Messaging.Core\Penguin.Messaging.Core.Local.csproj" />
     <ProjectReference Include="..\Penguin.Messaging.Persistence\Penguin.Messaging.Persistence.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Persistence.Abstractions\Penguin.Persistence.Abstractions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Persistence.Repositories\Penguin.Persistence.Repositories.Local.csproj" />
     <ProjectReference Include="..\Penguin.Reflection\Penguin.Reflection.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Reflection.Abstractions\Penguin.Reflection.Abstractions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Reflection.Extensions\Penguin.Reflection.Extensions.Local.csproj" />
   </ItemGroup>
 </Project>
