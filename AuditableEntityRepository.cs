@@ -5,6 +5,7 @@ using Penguin.Messaging.Core;
 using Penguin.Messaging.Persistence.Messages;
 using Penguin.Persistence.Abstractions.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 
@@ -39,6 +40,44 @@ namespace Penguin.Cms.Repositories
             Contract.Requires(createMessage != null);
 
             createMessage.Target.DateCreated = DateTime.Now;
+        }
+
+        public void Delete(T o, bool Force)
+        {
+            if (Force)
+            {
+                base.Delete(o);
+            } else
+            {
+                o.DateDeleted = DateTime.Now;
+            }
+        }
+
+        public override void Delete(T o)
+        {
+            o.DateDeleted = DateTime.Now;
+        }
+        public void DeleteRange(IEnumerable<T> o, bool Force)
+        {
+            if (Force)
+            {
+                base.DeleteRange(o);
+            }
+            else
+            {
+                foreach (T i in o)
+                {
+                    base.DeleteRange(o);
+                }
+            }
+        }
+
+        public override void DeleteRange(IEnumerable<T> o)
+        {
+            foreach (T i in o)
+            {
+                base.DeleteRange(o);
+            }
         }
 
         /// <summary>
