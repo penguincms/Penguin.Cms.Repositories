@@ -4,18 +4,205 @@
         <name>Penguin.Cms.Repositories</name>
     </assembly>
     <members>
-        <member name="T:Penguin.Cms.Repositories.UserAuditableEntityRepository`1">
+        <member name="T:Penguin.Cms.Repositories.AuditableEntityRepository`1">
             <summary>
-            This class should accept a user session and update the creator, but it does not currently.
+            The base repository for entites that should have changes tracked and logged
             </summary>
-            <typeparam name="T">Any user auditable entity type</typeparam>
+            <typeparam name="T">Any type inheriting from AuditableEntity</typeparam>
         </member>
-        <member name="M:Penguin.Cms.Repositories.UserAuditableEntityRepository`1.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{`0},Penguin.Messaging.Core.MessageBus)">
+        <member name="P:Penguin.Cms.Repositories.AuditableEntityRepository`1.All">
             <summary>
-            Creates a new instance of this repository
+            An override to access all objects, does not return objects that have been deleted
             </summary>
-            <param name="dbContext">The persistence context to use for the obejcts</param>
-            <param name="messageBus">And optional message bus for persistence messages</param>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.AuditableEntityRepository`1.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{`0},Penguin.Messaging.Core.MessageBus)">
+            <summary>
+            Creates a new instance of the auditable entity repository
+            </summary>
+            <param name="dbContext"></param>
+            <param name="messageBus"></param>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.AuditableEntityRepository`1.AcceptMessage(Penguin.Messaging.Persistence.Messages.Creating{`0})">
+            <summary>
+            A message handler for "Created" events to set the date created
+            </summary>
+            <param name="createMessage">The object message containing the object</param>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.AuditableEntityRepository`1.AcceptMessage(Penguin.Messaging.Persistence.Messages.Deleting{`0})">
+            <summary>
+            A message handler for "Deleting" events to set the date deleted
+            </summary>
+            <param name="deleteMessage">The object message containing the object</param>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.AuditableEntityRepository`1.AcceptMessage(Penguin.Messaging.Persistence.Messages.Updating{`0})">
+            <summary>
+            A message handler for the "Update" event that sets the modified property
+            </summary>
+            <param name="updateMessage"></param>
+        </member>
+        <member name="T:Penguin.Cms.Repositories.EntityRepository`1">
+            <summary>
+            The base repository responsible for managing all CMS entities
+            </summary>
+            <typeparam name="T">Any CMS entity type</typeparam>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{`0},Penguin.Messaging.Core.MessageBus)">
+            <summary>
+            Constructs a new instance of this repository
+            </summary>
+            <param name="dbContext">Any persistence context for this entity</param>
+            <param name="messageBus">An optional message bus to use for persistence messages</param>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            Gets an IEnumerable of objects based on the Guid
+            </summary>
+            <param name="guids">The guids to search for</param>
+            <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Find(System.String)">
+            <summary>
+            Gets an entity based on its external id
+            </summary>
+            <param name="ExternalId">The external ID of the object to retrieve</param>
+            <returns>An object with the matching ExternalID or null</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets an IEnumerable of objects based on the External Ids
+            </summary>
+            <param name="ExternalIds">The External Ids to search for</param>
+            <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Find(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Gets an IEnumerable of objects from the Persistence Context that match the provided list. Useful for refreshing from the context
+            </summary>
+            <param name="o">The matching objects to return</param>
+            <returns>The matching objects</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Find(`0)">
+            <summary>
+            Gets any individual object based on its Id (if saved) or its Guid (if not)
+            </summary>
+            <param name="o">the object to search for</param>
+            <returns>The persistence context version of the object</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Find(System.Guid)">
+            <summary>
+            Retrieves an object instance from the persistence context by its Guid
+            </summary>
+            <param name="guid">The Guid to look for</param>
+            <returns>An object instance, or null</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Penguin#Cms#Repositories#Interfaces#IEntityRepository#Find(System.Guid)">
+            <summary>
+            Retrieves an object instance from the persistence context by its Guid
+            </summary>
+            <param name="guid">The Guid to look for</param>
+            <returns>An object instance, or null</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Penguin#Cms#Repositories#Interfaces#IEntityRepository#Find(System.String)">
+            <summary>
+            Gets an entity based on its external id
+            </summary>
+            <param name="ExternalId">The external ID of the object to retrieve</param>
+            <returns>An object with the matching ExternalID or null</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Penguin#Cms#Repositories#Interfaces#IEntityRepository#FindRange(System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            Gets an IEnumerable of objects based on the Guid
+            </summary>
+            <param name="guids">The guids to search for</param>
+            <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Penguin#Cms#Repositories#Interfaces#IEntityRepository#FindRange(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets an IEnumerable of objects based on the External Ids
+            </summary>
+            <param name="ExternalIds">The External Ids to search for</param>
+            <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Find(System.Object)">
+            <summary>
+            Attempts to find the key type and passes it to the appropriate typed find method
+            </summary>
+            <param name="Key">The key to search for</param>
+            <returns>An object with a key of the specified type that matches</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.ShallowClone(`0)">
+            <summary>
+            ShallowClones and object and resets its Guid/ExternalId/Id
+            </summary>
+            <param name="o">The object to clone</param>
+            <returns>A clone of the object</returns>
+        </member>
+        <member name="T:Penguin.Cms.Repositories.Interfaces.IEntityRepository">
+            <summary>
+            An nongeneric interface representing the base repository for all entities that inherit from "Entity"
+            </summary>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.Interfaces.IEntityRepository.Find(System.Guid)">
+            <summary>
+            Gets an entity by its guid
+            </summary>
+            <param name="guid">The guid to get</param>
+            <returns>An entity matching the Guid, or null</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.Interfaces.IEntityRepository.Find(System.String)">
+            <summary>
+            Gets an entity by its external ID
+            </summary>
+            <param name="ExternalId">The external Id of the entity to get</param>
+            <returns>An entity with a matching external Id, or null</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.Interfaces.IEntityRepository.FindRange(System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            Gets an IEnumerable of entities where the Guid is found in the provided list
+            </summary>
+            <param name="guids">The list of Guids to search for</param>
+            <returns>an IEnumerable of entities where the Guid is found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.Interfaces.IEntityRepository.FindRange(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets an IEnumerable of entities where the External Id is found in the provided list
+            </summary>
+            <param name="ExternalIds">The list of External Ids to search for</param>
+            <returns>an IEnumerable of entities where the External Id is found in the provided list</returns>
+        </member>
+        <member name="T:Penguin.Cms.Repositories.Interfaces.IEntityRepository`1">
+            <summary>
+            An interface representing the base repository for all entities that inherit from "Entity"
+            </summary>
+            <typeparam name="T">Any Entity Type</typeparam>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.Interfaces.IEntityRepository`1.Find(System.Guid)">
+            <summary>
+            Gets an entity by its guid
+            </summary>
+            <param name="guid">The guid to get</param>
+            <returns>An entity matching the Guid, or null</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.Interfaces.IEntityRepository`1.Find(System.String)">
+            <summary>
+            Gets an entity by its external ID
+            </summary>
+            <param name="ExternalId">The external Id of the entity to get</param>
+            <returns>An entity with a matching external Id, or null</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.Interfaces.IEntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            Gets an IEnumerable of entities where the Guid is found in the provided list
+            </summary>
+            <param name="guids">The list of Guids to search for</param>
+            <returns>an IEnumerable of entities where the Guid is found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.Interfaces.IEntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets an IEnumerable of entities where the External Id is found in the provided list
+            </summary>
+            <param name="ExternalIds">The list of External Ids to search for</param>
+            <returns>an IEnumerable of entities where the External Id is found in the provided list</returns>
         </member>
     </members>
 </doc>
