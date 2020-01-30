@@ -7,6 +7,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Penguin.Cms.Repositories</AssemblyName>
     <RootNamespace>Penguin.Cms.Repositories</RootNamespace>
+    <DocumentationFile>Penguin.Cms.Repositories.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Penguin.Persistence.Repositories" Version="3.0.3-T9QC72V" />
