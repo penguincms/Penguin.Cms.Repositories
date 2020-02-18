@@ -1,5 +1,4 @@
 ﻿using Penguin.Cms.Entities;
-using Penguin.Entities;
 using Penguin.Messaging.Abstractions.Interfaces;
 using Penguin.Messaging.Core;
 using Penguin.Messaging.Persistence.Messages;
@@ -42,44 +41,6 @@ namespace Penguin.Cms.Repositories
             createMessage.Target.DateCreated = DateTime.Now;
         }
 
-        public void Delete(T o, bool Force)
-        {
-            if (Force)
-            {
-                base.Delete(o);
-            } else
-            {
-                o.DateDeleted = DateTime.Now;
-            }
-        }
-
-        public override void Delete(T o)
-        {
-            o.DateDeleted = DateTime.Now;
-        }
-        public void DeleteRange(IEnumerable<T> o, bool Force)
-        {
-            if (Force)
-            {
-                base.DeleteRange(o);
-            }
-            else
-            {
-                foreach (T i in o)
-                {
-                    base.DeleteRange(o);
-                }
-            }
-        }
-
-        public override void DeleteRange(IEnumerable<T> o)
-        {
-            foreach (T i in o)
-            {
-                base.DeleteRange(o);
-            }
-        }
-
         /// <summary>
         /// A message handler for "Deleting" events to set the date deleted
         /// </summary>
@@ -101,6 +62,46 @@ namespace Penguin.Cms.Repositories
             Contract.Requires(updateMessage != null);
 
             updateMessage.Target.DateModified = DateTime.Now;
+        }
+
+        public void Delete(T o, bool Force)
+        {
+            if (Force)
+            {
+                base.Delete(o);
+            }
+            else
+            {
+                o.DateDeleted = DateTime.Now;
+            }
+        }
+
+        public override void Delete(T o)
+        {
+            o.DateDeleted = DateTime.Now;
+        }
+
+        public void DeleteRange(IEnumerable<T> o, bool Force)
+        {
+            if (Force)
+            {
+                base.DeleteRange(o);
+            }
+            else
+            {
+                foreach (T i in o)
+                {
+                    base.DeleteRange(o);
+                }
+            }
+        }
+
+        public override void DeleteRange(IEnumerable<T> o)
+        {
+            foreach (T i in o)
+            {
+                base.DeleteRange(o);
+            }
         }
     }
 }

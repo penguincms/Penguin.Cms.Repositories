@@ -26,31 +26,11 @@ namespace Penguin.Cms.Repositories
         }
 
         /// <summary>
-        /// Gets an IEnumerable of objects based on the Guid
-        /// </summary>
-        /// <param name="guids">The guids to search for</param>
-        /// <returns>A list of entities where their ID was found in the provided list</returns>
-        public virtual IEnumerable<T> FindRange(IEnumerable<Guid> guids)
-        {
-            return this.Where(e => guids.Contains(e.Guid));
-        }
-
-        /// <summary>
         /// Gets an entity based on its external id
         /// </summary>
         /// <param name="ExternalId">The external ID of the object to retrieve</param>
         /// <returns>An object with the matching ExternalID or null</returns>
         public virtual T Find(string ExternalId) => this.Where(e => e.ExternalId == ExternalId).SingleOrDefault();
-
-        /// <summary>
-        /// Gets an IEnumerable of objects based on the External Ids
-        /// </summary>
-        /// <param name="ExternalIds">The External Ids to search for</param>
-        /// <returns>A list of entities where their ID was found in the provided list</returns>
-        public virtual IEnumerable<T> FindRange(IEnumerable<string> ExternalIds)
-        {
-            return this.Where(e => ExternalIds.Contains(e.ExternalId));
-        }
 
         /// <summary>
         /// Gets an IEnumerable of objects from the Persistence Context that match the provided list. Useful for refreshing from the context
@@ -113,6 +93,54 @@ namespace Penguin.Cms.Repositories
         Entity IEntityRepository.Find(string ExternalId) => this.Find(ExternalId);
 
         /// <summary>
+        /// Attempts to find the key type and passes it to the appropriate typed find method
+        /// </summary>
+        /// <param name="Key">The key to search for</param>
+        /// <returns>An object with a key of the specified type that matches</returns>
+        public override T Find(object Key)
+        {
+            if (Key is Guid g)
+            {
+                return this.Find(g);
+            }
+            else if (Key is string s)
+            {
+                return this.Find(s);
+            }
+            else if (this.GetType().GetGenericArguments()[0].IsAssignableFrom(Key.GetType()))
+            {
+                //JIT Fucks up the generic sometimes apparently and returns __Canon, which causes
+                //the parameter to get treated as an object, breaking the repository if you dont redirect
+                //the call
+                return this.Find(Key as T);
+            }
+            else
+            {
+                return base.Find(Key);
+            }
+        }
+
+        /// <summary>
+        /// Gets an IEnumerable of objects based on the Guid
+        /// </summary>
+        /// <param name="guids">The guids to search for</param>
+        /// <returns>A list of entities where their ID was found in the provided list</returns>
+        public virtual IEnumerable<T> FindRange(IEnumerable<Guid> guids)
+        {
+            return this.Where(e => guids.Contains(e.Guid));
+        }
+
+        /// <summary>
+        /// Gets an IEnumerable of objects based on the External Ids
+        /// </summary>
+        /// <param name="ExternalIds">The External Ids to search for</param>
+        /// <returns>A list of entities where their ID was found in the provided list</returns>
+        public virtual IEnumerable<T> FindRange(IEnumerable<string> ExternalIds)
+        {
+            return this.Where(e => ExternalIds.Contains(e.ExternalId));
+        }
+
+        /// <summary>
         /// Gets an IEnumerable of objects based on the Guid
         /// </summary>
         /// <param name="guids">The guids to search for</param>
@@ -155,31 +183,6 @@ namespace Penguin.Cms.Repositories
                 {
                     yield return toReturn;
                 }
-            }
-        }
-
-        /// <summary>
-        /// Attempts to find the key type and passes it to the appropriate typed find method
-        /// </summary>
-        /// <param name="Key">The key to search for</param>
-        /// <returns>An object with a key of the specified type that matches</returns>
-        public override T Find(object Key)
-        {
-            if (Key is Guid g)
-            {
-                return this.Find(g);
-            } else if (Key is string s)
-            {
-                return this.Find(s);
-            } else if(this.GetType().GetGenericArguments()[0].IsAssignableFrom(Key.GetType()))
-            {
-                //JIT Fucks up the generic sometimes apparently and returns __Canon, which causes 
-                //the parameter to get treated as an object, breaking the repository if you dont redirect
-                //the call
-                return this.Find(Key as T);
-            } else
-            {
-                return base.Find(Key);
             }
         }
 
