@@ -53,26 +53,12 @@
             <param name="dbContext">Any persistence context for this entity</param>
             <param name="messageBus">An optional message bus to use for persistence messages</param>
         </member>
-        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.Guid})">
-            <summary>
-            Gets an IEnumerable of objects based on the Guid
-            </summary>
-            <param name="guids">The guids to search for</param>
-            <returns>A list of entities where their ID was found in the provided list</returns>
-        </member>
         <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Find(System.String)">
             <summary>
             Gets an entity based on its external id
             </summary>
             <param name="ExternalId">The external ID of the object to retrieve</param>
             <returns>An object with the matching ExternalID or null</returns>
-        </member>
-        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Gets an IEnumerable of objects based on the External Ids
-            </summary>
-            <param name="ExternalIds">The External Ids to search for</param>
-            <returns>A list of entities where their ID was found in the provided list</returns>
         </member>
         <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Find(System.Collections.Generic.IEnumerable{`0})">
             <summary>
@@ -109,6 +95,27 @@
             <param name="ExternalId">The external ID of the object to retrieve</param>
             <returns>An object with the matching ExternalID or null</returns>
         </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Find(System.Object)">
+            <summary>
+            Attempts to find the key type and passes it to the appropriate typed find method
+            </summary>
+            <param name="Key">The key to search for</param>
+            <returns>An object with a key of the specified type that matches</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            Gets an IEnumerable of objects based on the Guid
+            </summary>
+            <param name="guids">The guids to search for</param>
+            <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets an IEnumerable of objects based on the External Ids
+            </summary>
+            <param name="ExternalIds">The External Ids to search for</param>
+            <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
         <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Penguin#Cms#Repositories#Interfaces#IEntityRepository#FindRange(System.Collections.Generic.IEnumerable{System.Guid})">
             <summary>
             Gets an IEnumerable of objects based on the Guid
@@ -122,13 +129,6 @@
             </summary>
             <param name="ExternalIds">The External Ids to search for</param>
             <returns>A list of entities where their ID was found in the provided list</returns>
-        </member>
-        <member name="M:Penguin.Cms.Repositories.EntityRepository`1.Find(System.Object)">
-            <summary>
-            Attempts to find the key type and passes it to the appropriate typed find method
-            </summary>
-            <param name="Key">The key to search for</param>
-            <returns>An object with a key of the specified type that matches</returns>
         </member>
         <member name="M:Penguin.Cms.Repositories.EntityRepository`1.ShallowClone(`0)">
             <summary>
