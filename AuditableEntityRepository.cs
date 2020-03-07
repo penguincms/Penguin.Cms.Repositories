@@ -91,17 +91,14 @@ namespace Penguin.Cms.Repositories
             {
                 foreach (T i in o)
                 {
-                    base.DeleteRange(o);
+                    i.DateDeleted = DateTime.Now;
                 }
             }
         }
 
         public override void DeleteRange(IEnumerable<T> o)
         {
-            foreach (T i in o)
-            {
-                base.DeleteRange(o);
-            }
+            base.DeleteRange(o);
         }
     }
 }
