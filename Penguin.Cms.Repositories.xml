@@ -139,7 +139,7 @@
         </member>
         <member name="T:Penguin.Cms.Repositories.Interfaces.IEntityRepository">
             <summary>
-            An nongeneric interface representing the base repository for all entities that inherit from "Entity"
+            An non-generic interface representing the base repository for all entities that inherit from "Entity"
             </summary>
         </member>
         <member name="M:Penguin.Cms.Repositories.Interfaces.IEntityRepository.Find(System.Guid)">

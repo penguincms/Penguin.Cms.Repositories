@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Penguin.Cms.Repositories.Interfaces
 {
     /// <summary>
-    /// An nongeneric interface representing the base repository for all entities that inherit from "Entity"
+    /// An non-generic interface representing the base repository for all entities that inherit from "Entity"
     /// </summary>
     public interface IEntityRepository : IKeyedObjectRepository
     {
