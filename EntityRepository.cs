@@ -67,7 +67,11 @@ namespace Penguin.Cms.Repositories
         /// <returns>The persistence context version of the object</returns>
         public T Find(T o)
         {
-            Contract.Requires(o != null);
+            if (o is null)
+            {
+                throw new ArgumentNullException(nameof(o));
+            }
+
             return o._Id == 0 ? this.Find(o.Guid) : this.Find(o._Id);
         }
 
@@ -111,6 +115,11 @@ namespace Penguin.Cms.Repositories
         /// <returns>An object with a key of the specified type that matches</returns>
         public override T Find(object Key)
         {
+            if (Key is null)
+            {
+                throw new ArgumentNullException(nameof(Key));
+            }
+
             if (Key is Guid g)
             {
                 return this.Find(g);

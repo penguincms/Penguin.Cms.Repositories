@@ -11,7 +11,7 @@ using System.Linq;
 namespace Penguin.Cms.Repositories
 {
     /// <summary>
-    /// The base repository for entites that should have changes tracked and logged
+    /// The base repository for entities that should have changes tracked and logged
     /// </summary>
     /// <typeparam name="T">Any type inheriting from AuditableEntity</typeparam>
     public class AuditableEntityRepository<T> : EntityRepository<T>, IMessageHandler<Deleting<T>>, IMessageHandler<Updating<T>>, IMessageHandler<Creating<T>> where T : AuditableEntity
@@ -36,7 +36,10 @@ namespace Penguin.Cms.Repositories
         /// <param name="createMessage">The object message containing the object</param>
         public virtual void AcceptMessage(Creating<T> createMessage)
         {
-            Contract.Requires(createMessage != null);
+            if (createMessage is null)
+            {
+                throw new ArgumentNullException(nameof(createMessage));
+            }
 
             createMessage.Target.DateCreated = DateTime.Now;
         }
@@ -47,7 +50,10 @@ namespace Penguin.Cms.Repositories
         /// <param name="deleteMessage">The object message containing the object</param>
         public virtual void AcceptMessage(Deleting<T> deleteMessage)
         {
-            Contract.Requires(deleteMessage != null);
+            if (deleteMessage is null)
+            {
+                throw new ArgumentNullException(nameof(deleteMessage));
+            }
 
             deleteMessage.Target.DateDeleted = DateTime.Now;
             deleteMessage.Target.DateModified = DateTime.Now;
@@ -59,13 +65,21 @@ namespace Penguin.Cms.Repositories
         /// <param name="updateMessage"></param>
         public virtual void AcceptMessage(Updating<T> updateMessage)
         {
-            Contract.Requires(updateMessage != null);
+            if (updateMessage is null)
+            {
+                throw new ArgumentNullException(nameof(updateMessage));
+            }
 
             updateMessage.Target.DateModified = DateTime.Now;
         }
 
         public void Delete(T o, bool Force)
         {
+            if (o is null)
+            {
+                throw new ArgumentNullException(nameof(o));
+            }
+
             if (Force)
             {
                 base.Delete(o);
@@ -78,11 +92,21 @@ namespace Penguin.Cms.Repositories
 
         public override void Delete(T o)
         {
+            if (o is null)
+            {
+                throw new ArgumentNullException(nameof(o));
+            }
+
             o.DateDeleted = DateTime.Now;
         }
 
         public void DeleteRange(IEnumerable<T> o, bool Force)
         {
+            if (o is null)
+            {
+                throw new ArgumentNullException(nameof(o));
+            }
+
             if (Force)
             {
                 base.DeleteRange(o);
