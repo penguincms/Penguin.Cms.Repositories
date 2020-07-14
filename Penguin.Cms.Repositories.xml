@@ -6,7 +6,7 @@
     <members>
         <member name="T:Penguin.Cms.Repositories.AuditableEntityRepository`1">
             <summary>
-            The base repository for entites that should have changes tracked and logged
+            The base repository for entities that should have changes tracked and logged
             </summary>
             <typeparam name="T">Any type inheriting from AuditableEntity</typeparam>
         </member>
