@@ -128,16 +128,30 @@ namespace Penguin.Cms.Repositories
             {
                 return this.Find(s);
             }
-            else if (this.GetType().GetGenericArguments()[0].IsAssignableFrom(Key.GetType()))
+            else if (Key is int i)
             {
-                //JIT Fucks up the generic sometimes apparently and returns __Canon, which causes
-                //the parameter to get treated as an object, breaking the repository if you dont redirect
-                //the call
-                return this.Find(Key as T);
+                return this.Find(i);
             }
             else
             {
-                return base.Find(Key);
+                Type t = this.GetType();
+
+                while (t != typeof(object) && t != null && t.GetGenericArguments().Length != 1)
+                {
+                    t = t.BaseType;
+                }
+
+                if (t == typeof(object) || t == null)
+                {
+                    return base.Find(Key);
+                }
+                else
+                {
+                    //JIT Fucks up the generic sometimes apparently and returns __Canon, which causes
+                    //the parameter to get treated as an object, breaking the repository if you dont redirect
+                    //the call
+                    return this.Find(Key as T);
+                }
             }
         }
 
