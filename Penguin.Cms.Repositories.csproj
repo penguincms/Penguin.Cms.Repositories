@@ -10,7 +10,7 @@
     <DocumentationFile>Penguin.Cms.Repositories.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Persistence.Repositories" Version="5.0.1-TA4HCPV" />
-    <PackageReference Include="Penguin.Cms.Entities" Version="5.0.1-TA4HCPV" />
+    <PackageReference Include="Penguin.Persistence.Repositories" Version="5.0.1-TA56XNT" />
+    <PackageReference Include="Penguin.Cms.Entities" Version="5.0.1-TA56XNT" />
   </ItemGroup>
 </Project>
