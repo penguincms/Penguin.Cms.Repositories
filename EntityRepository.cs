@@ -5,7 +5,6 @@ using Penguin.Persistence.Abstractions.Interfaces;
 using Penguin.Persistence.Repositories.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Penguin.Cms.Repositories
@@ -82,7 +81,6 @@ namespace Penguin.Cms.Repositories
         /// </summary>
         /// <param name="guid">The Guid to look for</param>
         /// <returns>An object instance, or null</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>")]
         public virtual T Find(Guid guid)
         {
             return this.FirstOrDefault(e => e.Guid == guid);
