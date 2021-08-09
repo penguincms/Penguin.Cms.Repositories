@@ -11,6 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Penguin.Cms.Entities" Version="5.0.6-TAHULSY" />
-    <PackageReference Include="Penguin.Persistence.Repositories" Version="5.0.6-TAHULSY" />
+    <PackageReference Include="Penguin.Persistence.Repositories" Version="5.0.6-TAJHTXV" />
   </ItemGroup>
 </Project>
