@@ -119,9 +119,6 @@ namespace Penguin.Cms.Repositories
             }
         }
 
-        public override void DeleteRange(IEnumerable<T> o)
-        {
-            base.DeleteRange(o);
-        }
+        public override void DeleteRange(IEnumerable<T> o) => base.DeleteRange(o);
     }
 }
