@@ -29,7 +29,10 @@ namespace Penguin.Cms.Repositories
         /// </summary>
         /// <param name="ExternalId">The external ID of the object to retrieve</param>
         /// <returns>An object with the matching ExternalID or null</returns>
-        public virtual T Find(string ExternalId) => this.Where(e => e.ExternalId == ExternalId).SingleOrDefault();
+        public virtual T Find(string ExternalId)
+        {
+            return this.Where(e => e.ExternalId == ExternalId).SingleOrDefault();
+        }
 
         /// <summary>
         /// Gets an IEnumerable of objects from the Persistence Context that match the provided list. Useful for refreshing from the context
@@ -78,21 +81,30 @@ namespace Penguin.Cms.Repositories
         /// </summary>
         /// <param name="guid">The Guid to look for</param>
         /// <returns>An object instance, or null</returns>
-        public virtual T Find(Guid guid) => this.FirstOrDefault(e => e.Guid == guid);
+        public virtual T Find(Guid guid)
+        {
+            return this.FirstOrDefault(e => e.Guid == guid);
+        }
 
         /// <summary>
         /// Retrieves an object instance from the persistence context by its Guid
         /// </summary>
         /// <param name="guid">The Guid to look for</param>
         /// <returns>An object instance, or null</returns>
-        Entity IEntityRepository.Find(Guid guid) => this.Find(guid);
+        Entity IEntityRepository.Find(Guid guid)
+        {
+            return this.Find(guid);
+        }
 
         /// <summary>
         /// Gets an entity based on its external id
         /// </summary>
         /// <param name="ExternalId">The external ID of the object to retrieve</param>
         /// <returns>An object with the matching ExternalID or null</returns>
-        Entity IEntityRepository.Find(string ExternalId) => this.Find(ExternalId);
+        Entity IEntityRepository.Find(string ExternalId)
+        {
+            return this.Find(ExternalId);
+        }
 
         /// <summary>
         /// Attempts to find the key type and passes it to the appropriate typed find method
@@ -146,14 +158,20 @@ namespace Penguin.Cms.Repositories
         /// </summary>
         /// <param name="guids">The guids to search for</param>
         /// <returns>A list of entities where their ID was found in the provided list</returns>
-        public virtual IEnumerable<T> FindRange(IEnumerable<Guid> guids) => this.Where(e => guids.Contains(e.Guid));
+        public virtual IEnumerable<T> FindRange(IEnumerable<Guid> guids)
+        {
+            return this.Where(e => guids.Contains(e.Guid));
+        }
 
         /// <summary>
         /// Gets an IEnumerable of objects based on the External Ids
         /// </summary>
         /// <param name="ExternalIds">The External Ids to search for</param>
         /// <returns>A list of entities where their ID was found in the provided list</returns>
-        public virtual IEnumerable<T> FindRange(IEnumerable<string> ExternalIds) => this.Where(e => ExternalIds.Contains(e.ExternalId));
+        public virtual IEnumerable<T> FindRange(IEnumerable<string> ExternalIds)
+        {
+            return this.Where(e => ExternalIds.Contains(e.ExternalId));
+        }
 
         /// <summary>
         /// Gets an IEnumerable of objects based on the Guid
