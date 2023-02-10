@@ -48,14 +48,7 @@ namespace Penguin.Cms.Repositories
 
             foreach (T to in o)
             {
-                if (to._Id != 0)
-                {
-                    yield return this.Find(to._Id);
-                }
-                else
-                {
-                    yield return this.Find(to.Guid);
-                }
+                yield return to._Id != 0 ? Find(to._Id) : Find(to.Guid);
             }
         }
 
@@ -66,12 +59,7 @@ namespace Penguin.Cms.Repositories
         /// <returns>The persistence context version of the object</returns>
         public T Find(T o)
         {
-            if (o is null)
-            {
-                throw new ArgumentNullException(nameof(o));
-            }
-
-            return o._Id == 0 ? this.Find(o.Guid) : this.Find(o._Id);
+            return o is null ? throw new ArgumentNullException(nameof(o)) : o._Id == 0 ? Find(o.Guid) : Find(o._Id);
         }
 
         //Id might be 0 for static representations of entities. This should only be true for security groups
@@ -93,7 +81,7 @@ namespace Penguin.Cms.Repositories
         /// <returns>An object instance, or null</returns>
         Entity IEntityRepository.Find(Guid guid)
         {
-            return this.Find(guid);
+            return Find(guid);
         }
 
         /// <summary>
@@ -103,7 +91,7 @@ namespace Penguin.Cms.Repositories
         /// <returns>An object with the matching ExternalID or null</returns>
         Entity IEntityRepository.Find(string ExternalId)
         {
-            return this.Find(ExternalId);
+            return Find(ExternalId);
         }
 
         /// <summary>
@@ -120,19 +108,19 @@ namespace Penguin.Cms.Repositories
 
             if (Key is Guid g)
             {
-                return this.Find(g);
+                return Find(g);
             }
             else if (Key is string s)
             {
-                return this.Find(s);
+                return Find(s);
             }
             else if (Key is int i)
             {
-                return this.Find(i);
+                return Find(i);
             }
             else
             {
-                Type t = this.GetType();
+                Type t = GetType();
 
                 while (t != typeof(object) && t != null && t.GetGenericArguments().Length != 1)
                 {
@@ -148,7 +136,7 @@ namespace Penguin.Cms.Repositories
                     //JIT Fucks up the generic sometimes apparently and returns __Canon, which causes
                     //the parameter to get treated as an object, breaking the repository if you dont redirect
                     //the call
-                    return this.Find(Key as T);
+                    return Find(Key as T);
                 }
             }
         }
@@ -187,7 +175,7 @@ namespace Penguin.Cms.Repositories
 
             foreach (Guid g in guids)
             {
-                Entity toReturn = this.Context.FirstOrDefault(e => e.Guid == g);
+                Entity toReturn = Context.FirstOrDefault(e => e.Guid == g);
 
                 if (toReturn != null)
                 {
@@ -210,7 +198,7 @@ namespace Penguin.Cms.Repositories
 
             foreach (string s in ExternalIds)
             {
-                Entity toReturn = this.Context.FirstOrDefault(e => e.ExternalId == s);
+                Entity toReturn = Context.FirstOrDefault(e => e.ExternalId == s);
 
                 if (toReturn != null)
                 {
