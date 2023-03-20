@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
   <PropertyGroup>
-    <PackageProjectUrl>https://github.com/PenguinCMS/Penguin.Cms.Repositories</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/PenguinCms/Penguin.Cms.Repositories</PackageProjectUrl>
     <Version>5.0.5</Version>
     <Description>Provides base repository classes intended for use with Penguin.Cms modules.</Description>
     <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
